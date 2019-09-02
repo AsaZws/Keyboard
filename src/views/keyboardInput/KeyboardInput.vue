@@ -1,10 +1,12 @@
 <template>
-  <div class="plate">
-    <input type="text" 
-      name="input" 
-      placeholder="请输入车牌" 
-      maxlength="8" 
-      value="粤B">
+  <div class="keyboard-input">
+    <div class="keyboard-input-padding">
+      <input type="text" 
+        name="input" 
+        placeholder="请输入车牌" 
+        maxlength="8" 
+        value="">
+    </div>
   </div>
 </template>
 
@@ -16,17 +18,22 @@ export default {
 
 <style lang="scss">
 
-.plate {
-  margin-top: 2em;
-  input {
-    width: 100%;
-    height: 1.5em;
-    font-size: 1.5em;
-    outline: none;
-    border-bottom: 1px solid #8c8c8c;
-  }
-  .plate input::-webkit-input-placeholder {
-    color: #8c8c8c;
+.keyboard-input {
+  margin-top: 48px;
+  .keyboard-input-padding {
+    padding: 0 32px;
+    input {
+      width: 100%;
+      height: 32px;
+      padding: 2px 8px;
+      font-size: 18px;
+      outline: none;
+      border-bottom: 1px solid #acacac;
+    }
+    input::-webkit-input-placeholder {
+      color: #acacac;
+      font-weight: 200;
+    }
   }
 }
 

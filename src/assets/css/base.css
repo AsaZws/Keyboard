@@ -33,6 +33,11 @@ a {
   text-decoration: none;
 }
 
+input{  
+  background:none;  
+  outline:none;  
+  border:none;
+}
 
 .clear-fix::after {
   clear: both;
