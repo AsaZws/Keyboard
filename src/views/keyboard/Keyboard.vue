@@ -1,7 +1,7 @@
 <template>
-  <div class="keyboard">
-    <div class="keyboard-close">
-      <p>关闭</p>
+  <div class="keyboard" v-if="show">
+    <div class="keyboard-close" @click="closeClick">
+      <p>确定</p>
     </div>
     <div class="place-letter">
       <ul>
@@ -23,21 +23,11 @@ var _PVS = "京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝�
 var _NUM = "1234567890QWERTYUP港澳ASDFGHJKL学ZXCVBNM警";
 export default {
   name:'Keyboard',
-  props: {
-    plateNumber: {
-      type: Array,
-      default: () => []
-    }
-  },
   data() {
-    if(this.plateNumber.length > 0) {
-      return {
-        keyboard: _NUM
-      }
-    } else {
-      return {
-        keyboard: _PVS
-      }
+    return {
+      keyboard : '',
+      plateNumber: [],
+      show: true
     }
   },
   methods: {
@@ -51,13 +41,26 @@ export default {
       vm.$emit('plate', this.plateNumber);
     },
     keyboardClick(index) {
-      this.plateNumber.push(event.target.innerText);
+      if (this.plateNumber.length < 8) {
+        this.plateNumber.push(event.target.innerText);
+      }
       // 点击添加，当添加长度大于0时候显示数字键盘
       if(this.plateNumber.length > 0) {
         this.keyboard = _NUM;
       }
       // 发送数据
       vm.$emit('plate', this.plateNumber);
+    },
+    closeClick() {
+      this.show = false;
+    }
+  },
+  created() {
+    // 判断输入框内容长度渲染适合的键盘
+    if(this.plateNumber.length > 0) {
+      this.keyboard = _NUM;
+    } else {
+      this.keyboard = _PVS;
     }
   }
 }

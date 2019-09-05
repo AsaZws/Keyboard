@@ -18,14 +18,14 @@ export default {
   name:'KeyboardInput',
   data() {
     return {
-      plateNumber: '粤B'
+      plateNumber: ''
     }
   },
   created() {
-    // 兄弟组件通信
-    vm.$on('plate', (plate) => {
-      plate = plate.join('');
-      this.plateNumber = plate
+    // 接收数据
+    vm.$on('plate', (data) => {
+      data = data.join('');
+      this.plateNumber = data
     })
   }
 }
