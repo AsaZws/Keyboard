@@ -1,18 +1,33 @@
 <template>
   <div class="keyboard-input">
     <div class="keyboard-input-padding">
-      <input type="text" 
-        name="input" 
-        placeholder="请输入车牌" 
-        maxlength="8" 
-        value="">
+      <input readonly="readonly"
+        type="text"
+        name="input"
+        placeholder="请输入车牌"
+        maxlength="8"
+        v-model="plateNumber">
     </div>
   </div>
 </template>
 
 <script>
+import vm from "@/event.js";
+
 export default {
-  name:'KeyboardInput'
+  name:'KeyboardInput',
+  data() {
+    return {
+      plateNumber: '粤B'
+    }
+  },
+  created() {
+    // 兄弟组件通信
+    vm.$on('plate', (plate) => {
+      plate = plate.join('');
+      this.plateNumber = plate
+    })
+  }
 }
 </script>
 
