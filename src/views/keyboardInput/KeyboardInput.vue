@@ -6,7 +6,9 @@
         name="input"
         placeholder="请输入车牌"
         maxlength="8"
-        v-model="plateNumber">
+        :value="plateNumber"
+        @click="keyboardInputClick">
+    <!-- <span class="licence-plate">{{ plateNumber }}</span> -->
     </div>
   </div>
 </template>
@@ -19,6 +21,12 @@ export default {
   data() {
     return {
       plateNumber: ''
+    }
+  },
+  methods: {
+    // 键盘点击事件
+    keyboardInputClick() {
+      vm.$emit('inputClick', true)
     }
   },
   created() {
@@ -36,18 +44,22 @@ export default {
 .keyboard-input {
   margin-top: 48px;
   .keyboard-input-padding {
-    padding: 0 32px;
+    padding: 0 40px;
+    text-align: center;
     input {
       width: 100%;
-      height: 32px;
-      padding: 2px 8px;
-      font-size: 18px;
+      padding: 12px 0;
+      font-size: 24px;
+      // text-indent: 8px;
+      letter-spacing: 8px;
       outline: none;
-      border-bottom: 1px solid #acacac;
+      border: 1px solid #acacac;
+      border-radius: 8px;
     }
     input::-webkit-input-placeholder {
       color: #acacac;
-      font-weight: 200;
+      font-weight: 100;
+      font-size: 20px;
     }
   }
 }

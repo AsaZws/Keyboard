@@ -1,25 +1,27 @@
 <template>
-  <div class="keyboard" v-if="show">
-    <div class="keyboard-close" @click="closeClick">
-      <p>确定</p>
+  <transition name="fade">
+    <div class="keyboard" v-if="show">
+      <div class="keyboard-close" @click="closeClick">
+        <p>确定</p>
+      </div>
+      <div class="place-letter">
+        <ul>
+          <li v-for="(item, index) in keyboard" @click="keyboardClick(index)">
+            {{ item }}
+          </li>
+          <li class="delete" @click="deleteClick">
+            <span>x</span>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="place-letter">
-      <ul>
-        <li v-for="(item, index) in keyboard" @click="keyboardClick(index)">
-          {{ item }}
-        </li>
-        <li class="delete" @click="deleteClick">
-          <span>x</span>
-        </li>
-      </ul>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>
 import vm from "@/event.js"
 
-var _PVS = "京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新";
+var _PVS = "京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新       ";
 var _NUM = "1234567890QWERTYUP港澳ASDFGHJKL学ZXCVBNM警";
 export default {
   name:'Keyboard',
@@ -41,7 +43,8 @@ export default {
       vm.$emit('plate', this.plateNumber);
     },
     keyboardClick(index) {
-      if (this.plateNumber.length < 8) {
+      // 插入空值，使得两个键盘键的个数一样
+      if (this.plateNumber.length < 8 && event.target.innerText !== '') {
         this.plateNumber.push(event.target.innerText);
       }
       // 点击添加，当添加长度大于0时候显示数字键盘
@@ -62,16 +65,35 @@ export default {
     } else {
       this.keyboard = _PVS;
     }
+    // 接收输入框点击数据
+    vm.$on('inputClick', data => {
+      this.show = data;
+    })
   }
 }
 </script>
 
 <style lang="scss">
+
+  .fade-enter {
+    opacity: 0;
+  }
+  .fade-enter-active {
+    transition: opacity 0.3s;
+  }
+  .fade-leave-to {
+    opacity: 0;
+  }
+  .fade-leave-active {
+    transition: opacity 0.3s;
+  }
+
   .keyboard {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 99999;
     background-color: #d1d4da;
     .keyboard-close {
       width: 100%;
@@ -105,13 +127,20 @@ export default {
         border-radius: 6px;
         box-shadow: 0 2px 0 #888a8d;
       }
+      li:active {
+        background-color: #abb1ba;
+      }
       .delete {
         padding: 0 16px;
         background: #abb1ba;
         span {
           border: 1px solid #000;
           padding: 2px 4px;
+          border-radius: 4px;
         }
+      }
+      .delete:active {
+        background-color: #fff;
       }
     }
   }

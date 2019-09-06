@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <keyboard-input/>
+    <!-- 输入框 -->
+    <keyboard-input />
+    <!-- 底部键盘 -->
     <keyboard/>
   </div>
 </template>
@@ -13,7 +15,7 @@ export default {
   name: 'app',
   components: {
     KeyboardInput,
-    Keyboard
+    Keyboard,
   }
 }
 </script>
