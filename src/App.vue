@@ -1,21 +1,17 @@
 <template>
   <div id="app">
-    <!-- 输入框 -->
-    <keyboard-input />
-    <!-- 底部键盘 -->
-    <keyboard/>
+    <!-- 快速缴费 -->
+    <fast-payment />
   </div>
 </template>
 
 <script>
-import KeyboardInput from '@/views/keyboardInput/KeyboardInput'
-import Keyboard from '@/views/keyboard/Keyboard'
+import FastPayment from '@/views/fastPayment/FastPayment'
 
 export default {
   name: 'app',
   components: {
-    KeyboardInput,
-    Keyboard,
+    FastPayment,
   }
 }
 </script>

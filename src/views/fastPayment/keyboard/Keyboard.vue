@@ -25,10 +25,11 @@ var _PVS = "京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝�
 var _NUM = "1234567890QWERTYUP港澳ASDFGHJKL学ZXCVBNM警";
 export default {
   name:'Keyboard',
+  props: ['plates'],
   data() {
     return {
       keyboard : '',
-      plateNumber: [],
+      plateNumber: this.plates.splice(","),
       show: true
     }
   },

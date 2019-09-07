@@ -8,7 +8,6 @@
         maxlength="8"
         :value="plateNumber"
         @click="keyboardInputClick">
-    <!-- <span class="licence-plate">{{ plateNumber }}</span> -->
     </div>
   </div>
 </template>
@@ -18,15 +17,16 @@ import vm from "@/event.js";
 
 export default {
   name:'KeyboardInput',
+  props: ['plates'],
   data() {
     return {
-      plateNumber: ''
+      plateNumber: this.plates
     }
   },
   methods: {
     // 键盘点击事件
     keyboardInputClick() {
-      vm.$emit('inputClick', true)
+      vm.$emit('inputClick', true);
     }
   },
   created() {
