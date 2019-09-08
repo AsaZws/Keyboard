@@ -6,9 +6,7 @@
       </div>
       <div class="place-letter">
         <ul>
-          <li v-for="(item, index) in keyboard" @click="keyboardClick(index)">
-            {{ item }}
-          </li>
+          <li v-for="(item, index) in keyboard" @click="keyboardClick(index)">{{ item }}</li>
           <li class="delete" @click="deleteClick">
             <span>x</span>
           </li>
@@ -19,41 +17,46 @@
 </template>
 
 <script>
-import vm from "@/event.js"
+import vm from "@/event.js";
+import {_PVS, _NUM} from "@/summary/plateDetails.js";
 
-var _PVS = "京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新       ";
-var _NUM = "1234567890QWERTYUP港澳ASDFGHJKL学ZXCVBNM警";
 export default {
-  name:'Keyboard',
-  props: ['plates'],
+  name: "Keyboard",
+  props: {
+    plates: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      keyboard : '',
-      plateNumber: this.plates.splice(","),
+      keyboard: "",
+      plateNumber: this.plates.split(""),
       show: true
-    }
+    };
   },
   methods: {
     deleteClick() {
-      this.plateNumber.splice(this.plateNumber.length-1, 1);
+      this.plateNumber.splice(this.plateNumber.length - 1, 1);
       // 点击删除，当删除到最后1位时显示地名键盘
-      if(this.plateNumber.length < 1) {
+      if (this.plateNumber.length < 1) {
         this.keyboard = _PVS;
       }
       // 发送数据
-      vm.$emit('plate', this.plateNumber);
+      vm.$emit("plate", this.plateNumber);
     },
     keyboardClick(index) {
       // 插入空值，使得两个键盘键的个数一样
-      if (this.plateNumber.length < 8 && event.target.innerText !== '') {
+      if (this.plateNumber.length < 8 && event.target.innerText !== "") {
         this.plateNumber.push(event.target.innerText);
       }
+      console.log(this.plateNumber);
       // 点击添加，当添加长度大于0时候显示数字键盘
-      if(this.plateNumber.length > 0) {
+      if (this.plateNumber.length > 0) {
         this.keyboard = _NUM;
       }
       // 发送数据
-      vm.$emit('plate', this.plateNumber);
+      vm.$emit("plate", this.plateNumber);
     },
     closeClick() {
       this.show = false;
@@ -61,88 +64,94 @@ export default {
   },
   created() {
     // 判断输入框内容长度渲染适合的键盘
-    if(this.plateNumber.length > 0) {
+    if (this.plateNumber.length > 0) {
       this.keyboard = _NUM;
     } else {
       this.keyboard = _PVS;
     }
     // 接收输入框点击数据
-    vm.$on('inputClick', data => {
+    vm.$on("inputClick", data => {
       this.show = data;
-    })
+    });
   }
-}
+};
 </script>
 
 <style lang="scss">
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 0.3s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
 
-  .fade-enter {
-    opacity: 0;
-  }
-  .fade-enter-active {
-    transition: opacity 0.3s;
-  }
-  .fade-leave-to {
-    opacity: 0;
-  }
-  .fade-leave-active {
-    transition: opacity 0.3s;
-  }
-
-  .keyboard {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 99999;
-    background-color: #d1d4da;
-    .keyboard-close {
-      width: 100%;
-      background-color: #F5F6F5;
-      box-shadow: 0 -1px 0 #EBEBEB;
-      p {
-        font-size: 14px;
-        color: #333;
-        padding: 4px;
-        text-align: right;
-      }
-    }
-    .place-letter ul {
-      display: -webkit-flex;
-      display: flex;
-      flex-flow: row wrap;
-      align-content: flex-start;
-      text-align: center;
-      align-items: center;
+.keyboard {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  background-color: #d1d4da;
+  // 禁止复制
+  -moz-user-select: none; /* Firefox私有属性 */
+  -webkit-user-select: none; /* WebKit内核私有属性 */
+  -ms-user-select: none; /* IE私有属性(IE10及以后) */
+  -khtml-user-select: none; /* KHTML内核私有属性 */
+  -o-user-select: none; /* Opera私有属性 */
+  user-select: none; /* CSS3属性 */
+  .keyboard-close {
+    width: 100%;
+    background-color: #f5f6f5;
+    box-shadow: 0 -1px 0 #ebebeb;
+    p {
+      font-size: 14px;
+      color: #333;
       padding: 4px;
-      li {
-        // flex: 0 0 7.82%;
-        // flex: 0 0 8.36%;
-        flex: 0 0 9.1%;
-        height: 42px;
-        line-height: 42px;
-        margin: 4px auto;
-        box-sizing: border-box;
-        background-color: #fff;
-        color: #000;
-        border-radius: 6px;
-        box-shadow: 0 2px 0 #888a8d;
-      }
-      li:active {
-        background-color: #abb1ba;
-      }
-      .delete {
-        padding: 0 16px;
-        background: #abb1ba;
-        span {
-          border: 1px solid #000;
-          padding: 2px 4px;
-          border-radius: 4px;
-        }
-      }
-      .delete:active {
-        background-color: #fff;
-      }
+      text-align: right;
     }
   }
+  .place-letter ul {
+    display: -webkit-flex;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    text-align: center;
+    align-items: center;
+    padding: 4px;
+    li {
+      // flex: 0 0 7.82%;
+      // flex: 0 0 8.36%;
+      flex: 0 0 9.1%;
+      height: 42px;
+      line-height: 42px;
+      margin: 4px auto;
+      box-sizing: border-box;
+      background-color: #fff;
+      color: #000;
+      border-radius: 6px;
+      box-shadow: 0 2px 0 #888a8d;
+    }
+    li:active {
+      background-color: #abb1ba;
+    }
+    .delete {
+      padding: 0 16px;
+      background: #abb1ba;
+      span {
+        border: 1px solid #000;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+    }
+    .delete:active {
+      background-color: #fff;
+    }
+  }
+}
 </style>

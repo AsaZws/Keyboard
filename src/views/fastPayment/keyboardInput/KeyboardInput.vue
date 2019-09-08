@@ -17,7 +17,12 @@ import vm from "@/event.js";
 
 export default {
   name:'KeyboardInput',
-  props: ['plates'],
+  props: {
+    plates: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       plateNumber: this.plates
@@ -27,6 +32,7 @@ export default {
     // 键盘点击事件
     keyboardInputClick() {
       vm.$emit('inputClick', true);
+      console.log(this.plates);
     }
   },
   created() {

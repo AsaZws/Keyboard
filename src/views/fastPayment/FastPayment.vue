@@ -3,7 +3,7 @@
     <!-- 输入框 -->
     <keyboard-input :plates="plates"></keyboard-input>
     <!-- 底部键盘 -->
-    <keyboard/>
+    <keyboard :plates="plates"></keyboard>
   </div>
 </template>
 
@@ -13,12 +13,6 @@ import Keyboard from './keyboard/Keyboard'
 
 export default {
   name: 'FastPayment',
-  // props: {
-  //   plates: {
-  //     type: String,
-  //     default: '粤B'
-  //   }
-  // },
   data() {
     return {
       plates: '粤B'
