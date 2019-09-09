@@ -1,7 +1,10 @@
 <template>
   <div class="keyboard-input">
+    <p>请输入车牌</p>
     <div class="keyboard-input-padding">
       <input readonly="readonly"
+        unselectable="on"
+        onfocus="this.blur();"
         type="text"
         name="input"
         placeholder="请输入车牌"
@@ -48,7 +51,11 @@ export default {
 <style lang="scss">
 
 .keyboard-input {
-  margin-top: 48px;
+  margin-top: 36px;
+  p {
+    text-align: center;
+    line-height: 48px;
+  }
   .keyboard-input-padding {
     padding: 0 40px;
     text-align: center;
