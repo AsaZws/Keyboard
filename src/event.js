@@ -1,3 +1,3 @@
-import Vue from 'Vue'
-const vm = new Vue()
+import Vue from 'vue';
+const vm = new Vue();
 export default vm;

@@ -50,10 +50,12 @@ export default {
       if (this.plateNumber.length < 8 && event.target.innerText !== "") {
         this.plateNumber.push(event.target.innerText);
       }
-      console.log(this.plateNumber);
       // 点击添加，当添加长度大于0时候显示数字键盘
       if (this.plateNumber.length > 0) {
         this.keyboard = _NUM;
+        console.log("长度大于7");
+      } else if(this.plateNumber.length > 6) {
+        console.log("长度大于7");
       }
       // 发送数据
       vm.$emit("plate", this.plateNumber);
@@ -63,7 +65,7 @@ export default {
     }
   },
   created() {
-    // 判断输入框内容长度渲染适合的键盘
+    // 输入框车牌号码长度大于0渲染数字字母键盘
     if (this.plateNumber.length > 0) {
       this.keyboard = _NUM;
     } else {

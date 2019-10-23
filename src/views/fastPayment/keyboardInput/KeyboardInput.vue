@@ -35,7 +35,6 @@ export default {
     // 键盘点击事件
     keyboardInputClick() {
       vm.$emit('inputClick', true);
-      console.log(this.plates);
     }
   },
   created() {
