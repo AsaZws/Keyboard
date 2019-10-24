@@ -1,10 +1,10 @@
 <template>
     <tab-bar>
         <tab-bar-item path="/plateBox">
-          <div slot="item-text">车牌框</div>
+          <div slot="item-text">车牌框box</div>
         </tab-bar-item>
-        <tab-bar-item path="/fastPatment">
-          <div slot="item-text">车牌input</div>
+        <tab-bar-item path="/plateInput">
+          <div slot="item-text">车牌框input</div>
         </tab-bar-item>
     </tab-bar>
 </template>

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 const PlateBox = () => import('views/plateBox/PlateBox');
-const FastPayment = () => import('views/fastPayment/FastPayment');
+const PlateInput = () => import('views/plateInput/PlateInput');
 
 Vue.use(Router);
 
@@ -16,8 +16,8 @@ const routes = [
     component: PlateBox
   },
   {
-    path: '/fastPatment',
-    component: FastPayment
+    path: '/plateInput',
+    component: PlateInput
   }
 ];
 

@@ -1,6 +1,5 @@
 <template>
   <div class="keyboard-input">
-    <p>请输入车牌</p>
     <div class="keyboard-input-padding">
       <input readonly="readonly"
         unselectable="on"
@@ -51,10 +50,6 @@ export default {
 
 .keyboard-input {
   margin-top: 36px;
-  p {
-    text-align: center;
-    line-height: 48px;
-  }
   .keyboard-input-padding {
     padding: 0 40px;
     text-align: center;

@@ -46,26 +46,29 @@ export default {
       vm.$emit("plate", this.plateNumber);
     },
     keyboardClick(index) {
-      // 插入空值，使得两个键盘键的个数一样
-      if (this.plateNumber.length < 8 && event.target.innerText !== "") {
-        this.plateNumber.push(event.target.innerText);
-      }
-      // 点击添加，当添加长度大于0时候显示数字键盘
-      if (this.plateNumber.length > 0) {
-        this.keyboard = _NUM;
-        console.log("长度大于7");
-      } else if(this.plateNumber.length > 6) {
-        console.log("长度大于7");
-      }
+      // 当前点击的值 
+      let theValue = event.target.innerText;
+      // 判断点击的值不为空
+      if (theValue !== '') {
+        this.plateNumber.push(theValue);
+        if (this.plateNumber.length >= 8) {
+          // 车牌最大只能为8位
+          this.plateNumber.length = 8;
+          this.plateNumber[this.plateNumber.length-1] = theValue;
+        } else if(this.plateNumber.length > 0) {
+          // 点击添加，当添加长度大于0时候显示数字键盘
+          this.keyboard = _NUM;
+        }
       // 发送数据
       vm.$emit("plate", this.plateNumber);
+      }
     },
     closeClick() {
       this.show = false;
     }
   },
   created() {
-    // 输入框车牌号码长度大于0渲染数字字母键盘
+    // 初始化车牌键盘
     if (this.plateNumber.length > 0) {
       this.keyboard = _NUM;
     } else {

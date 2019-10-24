@@ -12,7 +12,7 @@ export default {
         path: String,
         activeColor: {
             type: String,
-            default: 'red'
+            default: '#0A70F5'
         }
     },
     data() {
@@ -41,6 +41,7 @@ export default {
   flex: 1;
   text-align: center;
   height: 49px;
+  line-height: 49px;
   cursor: pointer;
 }
 </style>
