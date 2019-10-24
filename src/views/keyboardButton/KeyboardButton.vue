@@ -1,13 +1,23 @@
 <template>
   <div class="keyboard-button">
-    <a href="#" class="query-button">查询</a>
+    <a href="#" class="query-button" @click="queryClick">查询</a>
   </div>
 </template>
 
 <script>
+import vm from "@/event.js";
 
 export default {
-  name: 'keyboardButton'
+  name: 'keyboardButton',
+  methods: {
+    queryClick() {
+      // 接收数据
+      vm.$on('inputValue', (data) => {
+      console.log(data);
+      
+    })
+    }
+  }
 }
 </script>
 

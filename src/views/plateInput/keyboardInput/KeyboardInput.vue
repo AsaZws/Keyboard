@@ -31,16 +31,17 @@ export default {
     }
   },
   methods: {
-    // 键盘点击事件
+    // 车牌框点击事件
     keyboardInputClick() {
       vm.$emit('inputClick', true);
+      console.log(this.plateNumber);
     }
   },
   created() {
     // 接收数据
     vm.$on('plate', (data) => {
       data = data.join('');
-      this.plateNumber = data
+      this.plateNumber = data;
     })
   }
 }

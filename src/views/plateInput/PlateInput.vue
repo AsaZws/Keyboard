@@ -1,5 +1,5 @@
 <template>
-  <div id="fast-payment">
+  <div>
     <!-- 输入框 -->
     <keyboard-input :plates="plates"></keyboard-input>
     <keyboard-button></keyboard-button>
@@ -14,7 +14,7 @@ import Keyboard from './keyboard/Keyboard';
 import KeyboardButton from 'views/keyboardButton/KeyboardButton';
 
 export default {
-  name: 'FastPayment',
+  name: 'PlateInput',
   data() {
     return {
       plates: '粤B'
