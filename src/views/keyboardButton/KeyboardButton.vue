@@ -1,6 +1,6 @@
 <template>
   <div class="keyboard-button">
-    <a href="#" class="query-button" @click="queryClick">查询</a>
+    <a href="#" class="query-button" :class="{noClicks: isNoClicks}" @click="queryClick">查询</a>
   </div>
 </template>
 
@@ -9,14 +9,39 @@ import vm from "@/event.js";
 
 export default {
   name: 'keyboardButton',
+  props: {
+    plates: {  // 这个是父组件传过来的值
+      type: String,
+      required: true
+    }
+  },
+  data() {
+    return {
+      plateNumber: this.plates,
+      isNoClicks: true
+    }
+  },
   methods: {
     queryClick() {
-      // 接收数据
-      vm.$on('inputValue', (data) => {
-      console.log(data);
-      
-    })
+      // 点击按钮
+      console.log(this.plateNumber);
+    },
+    initButton() {
+      // 初始化按钮是否能点击
+      if (this.plateNumber.length < 7) {
+        this.isNoClicks = true
+      } else {
+        this.isNoClicks = false
+      }
     }
+  },
+  created() {
+    // 兄弟组件Keyboard传过来的值
+    vm.$on('plate', (data) => {
+      data = data.join('');
+      this.plateNumber = data;
+      this.initButton();
+    })
   }
 }
 </script>
@@ -34,6 +59,10 @@ export default {
     color: #fff;
     border-radius: 4px;
     font-size: 16px;
+  }
+  .noClicks {
+    pointer-events: none;
+    opacity: .6;
   }
   .query-button:active {
     background: #3bacff;

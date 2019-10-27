@@ -20,7 +20,7 @@ import vm from "@/event.js";
 export default {
   name:'KeyboardInput',
   props: {
-    plates: {
+    plates: {  // 父组件传过来的值
       type: String,
       required: true
     }
@@ -31,14 +31,13 @@ export default {
     }
   },
   methods: {
-    // 车牌框点击事件
     keyboardInputClick() {
+      // 发送车牌框点击的数据
       vm.$emit('inputClick', true);
-      console.log(this.plateNumber);
     }
   },
   created() {
-    // 接收数据
+    // 兄弟组件Keyboard传过来的值
     vm.$on('plate', (data) => {
       data = data.join('');
       this.plateNumber = data;

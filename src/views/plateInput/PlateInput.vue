@@ -2,7 +2,7 @@
   <div>
     <!-- 输入框 -->
     <keyboard-input :plates="plates"></keyboard-input>
-    <keyboard-button></keyboard-button>
+    <keyboard-button :plates="plates"></keyboard-button>
     <!-- 底部键盘 -->
     <keyboard :plates="plates"></keyboard>
   </div>

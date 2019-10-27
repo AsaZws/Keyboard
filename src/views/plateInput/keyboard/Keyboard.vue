@@ -42,7 +42,7 @@ export default {
       if (this.plateNumber.length < 1) {
         this.keyboard = _PVS;
       }
-      // 发送数据
+      // 删除后发送的车牌数据
       vm.$emit("plate", this.plateNumber);
     },
     keyboardClick(index) {
@@ -55,11 +55,13 @@ export default {
           // 车牌最大只能为8位
           this.plateNumber.length = 8;
           this.plateNumber[this.plateNumber.length-1] = theValue;
-        } else if(this.plateNumber.length > 0) {
+          this.show = false;
+        }
+        else if (this.plateNumber.length > 0) {
           // 点击添加，当添加长度大于0时候显示数字键盘
           this.keyboard = _NUM;
         }
-      // 发送数据
+      // 输入车牌号码发送的数据
       vm.$emit("plate", this.plateNumber);
       }
     },
@@ -68,13 +70,13 @@ export default {
     }
   },
   created() {
-    // 初始化车牌键盘
+    // 初始化车牌键盘样式
     if (this.plateNumber.length > 0) {
       this.keyboard = _NUM;
     } else {
       this.keyboard = _PVS;
     }
-    // 接收输入框点击数据
+    // 接收兄弟组件KeyboardInput传过来的数据
     vm.$on("inputClick", data => {
       this.show = data;
     });
