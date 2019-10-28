@@ -45,18 +45,16 @@ export default {
     this.initPlates(this.plates);
     // 兄弟组件Keyboard传过来的值
     vm.$on('plate', (data) => {
-      this.liActiveIndex ++;
-      console.log(this.liActiveIndex);
-      
-      if(this.liActiveIndex = 7) {
+      if(this.liActiveIndex < 8) {
+        this.liActiveIndex ++;
+      }
+      else if(this.liActiveIndex === 8) {
         this.liActiveIndex = 7
       }
       let platesClickNumber = data.pop();
       data[this.liActiveIndex-1] = platesClickNumber;
       data = data.join('');
       this.plateNumber[this.liActiveIndex-1] = platesClickNumber;
-      console.log(this.plateNumber);
-      console.log(data);
     })
   }
 }
