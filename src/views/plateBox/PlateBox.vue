@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Keyboard from 'views/plateInput/keyboard/Keyboard';
+import Keyboard from 'views/keyboard/Keyboard';
 import KeyboardBox from './keyboardBox/KerboardBox';
 import KeyboardButton from 'views/keyboardButton/KeyboardButton'
 
