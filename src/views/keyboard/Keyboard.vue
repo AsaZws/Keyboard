@@ -43,7 +43,7 @@ export default {
         this.keyboard = _PVS;
       }
       // 删除后发送的车牌数据
-      vm.$emit("plate", this.plateNumber);
+      vm.$emit("delete", this.plateNumber);
     },
     keyboardClick(index) {
       // 当前点击的值 
@@ -55,7 +55,7 @@ export default {
           // 车牌最大只能为8位
           this.plateNumber.length = 8;
           this.plateNumber[this.plateNumber.length-1] = theValue;
-          this.show = false;
+          // this.show = false;
         }
         else if (this.plateNumber.length > 0) {
           // 点击添加，当添加长度大于0时候显示数字键盘

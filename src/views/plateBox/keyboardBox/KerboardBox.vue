@@ -45,16 +45,19 @@ export default {
     this.initPlates(this.plates);
     // 兄弟组件Keyboard传过来的值
     vm.$on('plate', (data) => {
-      if(this.liActiveIndex < 8) {
+      if(this.liActiveIndex < 7) {
         this.liActiveIndex ++;
       }
-      else if(this.liActiveIndex === 8) {
-        this.liActiveIndex = 7
-      }
-      let platesClickNumber = data.pop();
-      data[this.liActiveIndex-1] = platesClickNumber;
-      data = data.join('');
+      let platesClickNumber = data.pop();  // 获取最后一次点击的那个车牌号码
+      data[this.liActiveIndex-1] = platesClickNumber;  // 修改数据源
+      console.log(data[this.liActiveIndex-1]);
       this.plateNumber[this.liActiveIndex-1] = platesClickNumber;
+    })
+    vm.$on('delete', (data) => {
+      if(this.liActiveIndex > 0) {
+        this.liActiveIndex --;
+      }
+      data.pop();
     })
   }
 }
