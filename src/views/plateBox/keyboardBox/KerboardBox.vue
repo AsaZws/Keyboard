@@ -32,6 +32,8 @@ export default {
       // 发送车牌框点击的数据
       vm.$emit('inputClick', true);
       this.liActiveIndex = index;
+      // 发送车牌框索引
+      vm.$emit("liActiveIndex", this.liActiveIndex);
     },
     initPlates(plate) {
       this.plateNumber = new Array(8).join(',').split(',');  // 定义8位长度的空数组
@@ -45,19 +47,19 @@ export default {
     this.initPlates(this.plates);
     // 兄弟组件Keyboard传过来的值
     vm.$on('plate', (data) => {
-      if(this.liActiveIndex < 7) {
-        this.liActiveIndex ++;
+      this.liActiveIndex ++;
+      if(this.liActiveIndex > 7) {
+        this.liActiveIndex = 8
       }
       let platesClickNumber = data.pop();  // 获取最后一次点击的那个车牌号码
       data[this.liActiveIndex-1] = platesClickNumber;  // 修改数据源
-      console.log(data[this.liActiveIndex-1]);
       this.plateNumber[this.liActiveIndex-1] = platesClickNumber;
     })
     vm.$on('delete', (data) => {
       if(this.liActiveIndex > 0) {
         this.liActiveIndex --;
       }
-      data.pop();
+      this.plateNumber[this.liActiveIndex+1] = "";
     })
   }
 }

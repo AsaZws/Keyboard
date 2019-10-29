@@ -55,7 +55,7 @@ export default {
           // 车牌最大只能为8位
           this.plateNumber.length = 8;
           this.plateNumber[this.plateNumber.length-1] = theValue;
-          // this.show = false;
+          this.show = false;
         }
         else if (this.plateNumber.length > 0) {
           // 点击添加，当添加长度大于0时候显示数字键盘
@@ -63,19 +63,28 @@ export default {
         }
       // 输入车牌号码发送的数据
       vm.$emit("plate", this.plateNumber);
+      console.log(this.plateNumber);
+      
       }
     },
     closeClick() {
       this.show = false;
+    },
+    initShow(index) {
+      // 初始化车牌键盘样式
+      if (index > 0) {
+        this.keyboard = _NUM;
+      } else {
+        this.keyboard = _PVS;
+      }
     }
   },
   created() {
-    // 初始化车牌键盘样式
-    if (this.plateNumber.length > 0) {
-      this.keyboard = _NUM;
-    } else {
-      this.keyboard = _PVS;
-    }
+    this.initShow(this.plates.length);
+    // 接收车牌框的点击索引
+    vm.$on("liActiveIndex", data => {
+      this.initShow(data);
+    })
     // 接收兄弟组件KeyboardInput传过来的数据
     vm.$on("inputClick", data => {
       this.show = data;

@@ -19,7 +19,6 @@
 <script>
 import vm from "@/event.js";
 import {_PVS, _NUM} from "@/summary/plateDetails.js";
-
 export default {
   name: "Keyboard",
   props: {
@@ -43,7 +42,7 @@ export default {
         this.keyboard = _PVS;
       }
       // 删除后发送的车牌数据
-      vm.$emit("plate", this.plateNumber);
+      vm.$emit("delete", this.plateNumber);
     },
     keyboardClick(index) {
       // 当前点击的值 
@@ -67,15 +66,19 @@ export default {
     },
     closeClick() {
       this.show = false;
+    },
+    initShow(index) {
+      // 初始化车牌键盘样式
+      if (index > 0) {
+        this.keyboard = _NUM;
+      } else {
+        this.keyboard = _PVS;
+      }
     }
   },
   created() {
     // 初始化车牌键盘样式
-    if (this.plateNumber.length > 0) {
-      this.keyboard = _NUM;
-    } else {
-      this.keyboard = _PVS;
-    }
+    this.initShow(this.plates.length);
     // 接收兄弟组件KeyboardInput传过来的数据
     vm.$on("inputClick", data => {
       this.show = data;
@@ -97,7 +100,6 @@ export default {
 .fade-leave-active {
   transition: opacity 0.3s;
 }
-
 .keyboard {
   position: fixed;
   bottom: 0;

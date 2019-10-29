@@ -10,7 +10,7 @@
 
 <script>
 import KeyboardInput from './keyboardInput/KeyboardInput';
-import Keyboard from './keyboard/Keyboard';
+import Keyboard from 'views/keyboard/Keyboard';
 import KeyboardButton from 'views/keyboardButton/KeyboardButton';
 
 export default {

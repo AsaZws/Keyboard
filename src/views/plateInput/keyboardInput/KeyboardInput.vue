@@ -42,6 +42,10 @@ export default {
       data = data.join('');
       this.plateNumber = data;
     })
+    vm.$on('delete', (data) => {
+      data = data.join('');
+      this.plateNumber = data;
+    })
   }
 }
 </script>
