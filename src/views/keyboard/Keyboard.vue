@@ -61,13 +61,14 @@ export default {
           // 点击添加，当添加长度大于0时候显示数字键盘
           this.keyboard = _NUM;
         }
-      // 输入车牌号码发送的数据
-      vm.$emit("plate", this.plateNumber);
-      console.log(this.plateNumber);
-      
+      // 点击发送整个车牌号码
+      vm.$emit("plateBox", this.plateNumber);
+      // 点击发送当前点击的车牌号码
+      vm.$emit("theValue", theValue);
       }
     },
     closeClick() {
+      // 点击关闭键盘
       this.show = false;
     },
     initShow(index) {

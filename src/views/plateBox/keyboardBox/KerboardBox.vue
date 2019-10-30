@@ -46,14 +46,22 @@ export default {
   created() {
     this.initPlates(this.plates);
     // 兄弟组件Keyboard传过来的值
-    vm.$on('plate', (data) => {
+    // vm.$on('plateBox', (data) => {
+    //   this.liActiveIndex ++;
+    //   if(this.liActiveIndex > 7) {
+    //     this.liActiveIndex = 8
+    //   }
+    //   let platesClickNumber = data.pop();  // 获取最后一次点击的那个车牌号码
+    //   data[this.liActiveIndex-1] = platesClickNumber;  // 修改数据源
+    //   this.plateNumber[this.liActiveIndex-1] = platesClickNumber;
+    // })
+    // 兄弟组件Keyboard传过来键盘当前点击的值
+    vm.$on("theValue", (data) => {
       this.liActiveIndex ++;
       if(this.liActiveIndex > 7) {
-        this.liActiveIndex = 8
+        this.liActiveIndex = 8;
       }
-      let platesClickNumber = data.pop();  // 获取最后一次点击的那个车牌号码
-      data[this.liActiveIndex-1] = platesClickNumber;  // 修改数据源
-      this.plateNumber[this.liActiveIndex-1] = platesClickNumber;
+      this.plateNumber[this.liActiveIndex-1] = data;
     })
     vm.$on('delete', (data) => {
       if(this.liActiveIndex > 0) {

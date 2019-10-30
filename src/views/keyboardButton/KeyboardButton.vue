@@ -37,10 +37,11 @@ export default {
   },
   created() {
     // 兄弟组件Keyboard传过来的值
-    vm.$on('plate', (data) => {
+    vm.$on('plateBox', (data) => {
       data = data.join('');
       this.plateNumber = data;
       this.initButton();
+      console.log(this.plateNumber);
     })
   }
 }
