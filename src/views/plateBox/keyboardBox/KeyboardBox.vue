@@ -45,16 +45,6 @@ export default {
   },
   created() {
     this.initPlates(this.plates);
-    // 兄弟组件Keyboard传过来的值
-    // vm.$on('plateBox', (data) => {
-    //   this.liActiveIndex ++;
-    //   if(this.liActiveIndex > 7) {
-    //     this.liActiveIndex = 8
-    //   }
-    //   let platesClickNumber = data.pop();  // 获取最后一次点击的那个车牌号码
-    //   data[this.liActiveIndex-1] = platesClickNumber;  // 修改数据源
-    //   this.plateNumber[this.liActiveIndex-1] = platesClickNumber;
-    // })
     // 兄弟组件Keyboard传过来键盘当前点击的值
     vm.$on("theValue", (data) => {
       this.liActiveIndex ++;
@@ -62,12 +52,18 @@ export default {
         this.liActiveIndex = 8;
       }
       this.plateNumber[this.liActiveIndex-1] = data;
+      // 当前车牌框里面的车牌号码传给父组件
+      vm.$emit("plateBox", this.plateNumber);
     })
     vm.$on('delete', (data) => {
       if(this.liActiveIndex > 0) {
         this.liActiveIndex --;
       }
       this.plateNumber[this.liActiveIndex+1] = "";
+      // 当前车牌框里面的车牌号码传给父组件
+      vm.$emit("plateBox", this.plateNumber);
+      // 发送车牌框索引
+      vm.$emit("liActiveIndex", this.liActiveIndex);
     })
   }
 }

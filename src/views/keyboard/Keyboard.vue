@@ -61,8 +61,6 @@ export default {
           // 点击添加，当添加长度大于0时候显示数字键盘
           this.keyboard = _NUM;
         }
-      // 点击发送整个车牌号码
-      vm.$emit("plateBox", this.plateNumber);
       // 点击发送当前点击的车牌号码
       vm.$emit("theValue", theValue);
       }

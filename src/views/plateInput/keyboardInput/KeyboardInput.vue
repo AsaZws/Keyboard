@@ -38,13 +38,17 @@ export default {
   },
   created() {
     // 兄弟组件Keyboard传过来的值
-    vm.$on('plate', (data) => {
-      data = data.join('');
-      this.plateNumber = data;
+    vm.$on('theValue', (data) => {
+      if(this.plateNumber.length < 8) {
+        this.plateNumber += data;
+      }
+      // 当前车牌框里面的车牌号码传给父组件
+      vm.$emit("plateInput", this.plateNumber);
     })
     vm.$on('delete', (data) => {
-      data = data.join('');
-      this.plateNumber = data;
+      this.plateNumber = data.join('');
+      // 当前车牌框里面的车牌号码传给父组件
+      vm.$emit("plateInput", this.plateNumber);
     })
   }
 }
@@ -59,13 +63,12 @@ export default {
     text-align: center;
     input {
       width: 100%;
-      padding: 12px 0;
-      font-size: 24px;
-      // text-indent: 8px;
+      padding: 10px 0;
+      font-size: 22px;
       letter-spacing: 8px;
       outline: none;
       border: 1px solid #acacac;
-      border-radius: 8px;
+      border-radius: 4px;
     }
     input::-webkit-input-placeholder {
       color: #acacac;
